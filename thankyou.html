@@ -3,6 +3,20 @@
     <head>
         <title>Thankyou page</title>
         <script>
+                var attempt = 3;
+            function submitType() {
+                var number = document.getElementById("otpType").value;
+                var passWord = otp;
+                if(passWord==otp){
+                    console.log("success")
+                }else{
+                    attempt --;
+                    console.log(`you left with ${attempt} attempts`);
+                }
+                if(attempt==0){
+                    console.log("you are blocked");
+                }
+            }
 
             window.onload  = function () {
                 let searchParams = new URLSearchParams(window.location.search);
@@ -19,6 +33,7 @@
         <p id="">Dear <span id="fName"></span> ,<br>
             Thank you for your inquiry. A 4 digit verification number has been sent to your phone number: <span id="Pnumber"></span>, please enter in the following box and submit for confirmation:
         </p>
-        <input type="text" placeholder="Enter OTP" id="">
+        <input type="text" placeholder="Enter OTP" id="otpType">
+        <button class="btn btn-primary" onclick="submitType()">Submit</button>
     </body>
 </html>
