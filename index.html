@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Javascrpt Assignment</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script>
+      var state = {
+        123: "Andhra Pradesh",
+        123: "Andaman and Nicobar Islands",
+        123: "Arunachal Pradesh",
+        123: "Assam",
+        123: "Bihar",
+        123: "Chandigarh",
+        123: "Chhattisgarh",
+        123: "Dadar and Nagar Haveli",
+        123: "Daman and Diu",
+        123: "Delhi",
+        123: "Lakshadweep",
+        123: "Puducherry",
+        123: "Goa",
+        123: "Gujarat",
+        123: "Haryana",
+        123: "Himachal Pradesh",
+        123: "Jammu and Kashmir",
+        123: "Jharkhand",
+        123: "Karnataka",
+        123: "Kerala",
+        123: "Madhya Pradesh",
+        123: "Maharashtra",
+        123: "Manipur",
+        123: "Meghalaya",
+        123: "Mizoram",
+        123: "Nagaland",
+        123: "Odisha",
+        123: "Punjab",
+        123: "Rajasthan",
+        123: "Sikkim",
+        123: "Tamil Nadu",
+        123: "Telangana",
+        123: "Tripura",
+        123: "Uttar Pradesh",
+        123: "Uttarakhand",
+        123: "West Bengal",
+      };
+
+      function verifyname() {
+        var name = document.getElementById("txtname").value;
+        var regexp = /([^a-zA-Z]*[A-Za-z]){4}\s([^a-zA-Z]*[A-Za-z]){4}/;
+        var msg = document.getElementById("msgname");
+        if (name == "") {
+          msg.innerHTML = "This field is required".bold();
+          msg.className = "text-danger";
+        } else if (name.match(regexp)) {
+          msg.innerHTML = "Success".bold();
+          msg.classList = "text-success";
+        }
+      }
+      function verifynumber() {
+        var name = document.getElementById("txtnumber").value;
+        var img = document.getElementById("cardimg");
+        var msg = document.getElementById("provide");
+        var providecode = name.slice(0, 3);
+        if (providecode >= 621 && providecode <= 799) {
+          img.src = "./Public/images/jio.png";
+          msg.innerHTML = "Reliance Jio".bold();
+          msg.className = "text-success";
+        } else if (providecode >= 801 && providecode <= 920) {
+          img.src = "./Public/images/idea.jpg";
+          msg.innerHTML = "Idea".bold();
+          msg.className = "text-danger";
+        } else if (providecode >= 921 && providecode <= 999) {
+          img.src = "./Public/images/vodafone.png";
+          msg.innerHTML = "vodafone".bold();
+          msg.className = "text-warning";
+        } else {
+          msg.innerHTML = "Number should be in given range".bold();
+          img.src = "";
+          img.alt = "N/A";
+        }
+        switch (name.length) {
+          case 3:
+
+          case 7:
+            document.getElementById("txtnumber").value = name + "-";
+            break;
+          default:
+            break;
+        }
+        if (name.length == 7) {
+          let statename = state[name.slice(4, 7) + ""];
+          if (statename != null) {
+            document.getElementById("state").innerText = "," + statename;
+          } else {
+            document.getElementById("state").innerText =
+              "Should be in the range";
+          }
+        }
+      }
+      function verifyemail() {
+        var email = document.getElementById("txtemail").value;
+        var msg = document.getElementById("msg");
+        if (email.endsWith("gmail.com")) {
+          msg.innerHTML = "email varifyed".bold();
+        } else {
+          msg.innerHTML = "";
+          msg.innerHTML = "Invalid type".bold();
+        }
+      }
+
+      function submitpage() {
+          var fullName = document.getElementById("txtname").value.split(" ")[0];
+          var validNumber = document.getElementById("txtnumber").value;
+
+          var queryParmas = '?fullname='+ fullName + '&phonenumber='+ validNumber; 
+          window.open("./thankyou.html"+queryParmas);
+      }
+    </script>
+  </head>
+  <body class="container-fluid">
+    <h3 class="text-center mt-2">Javascript Assignment</h3>
+    <form>
+      <div>
+        <div>
+          <h5>Full Name</h5>
+          <div class="input-group w-50">
+            <input
+              type="text"
+              id="txtname"
+              onkeyup="verifyname()"
+              class="form-control"
+            />
+          </div>
+          <div id="msgname"></div>
+        </div>
+        <div class="w-50">
+          <h5>Email</h5>
+          <input
+            type="email"
+            onkeyup="verifyemail()"
+            id="txtemail"
+            class="form-control"
+          /><span id="msg" class="input-group"></span>
+        </div>
+        <div>
+          <h5>Phone Number</h5>
+          <div class="input-group w-50">
+            <input
+              type="tel"
+              id="txtnumber"
+              pattern="^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$"
+              onkeyup="verifynumber()"
+              class="form-control"
+            />
+            <img
+              class="input-group-text img-fluid"
+              width="80px"
+              height="50px"
+              id="cardimg"
+            />
+          </div>
+          <div>
+            <span id="provide"></span>
+            <span id="state"></span>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary mt-4 w-25" onclick="submitpage()">Submit</button>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Thankyou page</title>
+        <script>
+
+            window.onload  = function () {
+                let searchParams = new URLSearchParams(window.location.search);
+                let one = searchParams.get('fullname');
+                let two= searchParams.get('phonenumber');
+                document.getElementById("fName").innerText = one;
+                document.getElementById("Pnumber").innerText = two;
+                var otp= (Math.floor(Math.random() * 10000) + 10000).toString().substring(1);
+                console.log("Your OTP is",otp);
+            }
+        </script>
+    </head>
+    <body>
+        <p id="">Dear <span id="fName"></span> ,<br>
+            Thank you for your inquiry. A 4 digit verification number has been sent to your phone number: <span id="Pnumber"></span>, please enter in the following box and submit for confirmation:
+        </p>
+        <input type="text" placeholder="Enter OTP" id="">
+    </body>
+</html>
